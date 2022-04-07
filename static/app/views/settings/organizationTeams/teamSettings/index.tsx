@@ -38,7 +38,9 @@ class TeamSettings extends AsyncView<Props, State> {
   }
 
   handleSubmitSuccess = (resp: any, model: FormModel, id?: string) => {
-    updateTeamSuccess(resp.slug, resp);
+    // Use the old slug when triggering the update so we correctly replace the
+    // previous team in the store
+    updateTeamSuccess(this.props.team.slug, resp);
     if (id === 'slug') {
       addSuccessMessage(t('Team name changed'));
       browserHistory.replace(
